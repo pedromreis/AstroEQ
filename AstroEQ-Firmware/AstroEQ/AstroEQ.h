@@ -57,8 +57,8 @@ inline unsigned long astroEQ_vernum () {
     //a floating point integer to 2.d.p. The result is then multiplied by 100
     //to convert to an integer version number representation. The result is then
     //returned. The whole operation will be optimised to a constant.
-    return (unsigned long)(100.0 *
-    #include "../VerNum.txt"
+    return (unsigned long)(100.0 * 8.18
+    //#include "VerNum.txt"
     );
 }
 
@@ -66,8 +66,8 @@ inline const char* astroEQ_verstr() {
     //This function will grab the version number from VerNumStr.txt which will be
     //a stringified version of the VerNum.txt file produced by the prebuild event.
     //The whole operation will be optimised to a constant.
-    return 
-    #include "../VerNumStr.txt"
+    return "8.18"
+    //#include "../VerNumStr.txt"
     ;
 }
 

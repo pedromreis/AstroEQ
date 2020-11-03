@@ -24,14 +24,20 @@ const char startOutChar = '=';
 const char errorChar = '!';
 const char endChar = '\r';
 
-inline void nibbleToHex(char* hex, byte nibble) {
+
+// inline void myInlinedFunction() __attribute__((always_inline));
+//void myInlinedFunction() {
+
+inline void nibbleToHex() __attribute__((always_inline));
+void nibbleToHex(char* hex, byte nibble) {
     if (nibble > 9){
         nibble += (('A'-'0')-0xA);
     }
     *hex = (nibble + '0');
 }
 
-inline void private_byteToHex(char* lower, char* upper, Nibbler nibbler){
+inline void private_byteToHex() __attribute__((always_inline));
+void private_byteToHex(char* lower, char* upper, Nibbler nibbler){
     nibbleToHex(lower, nibbler.low);
     nibbleToHex(upper, nibbler.high);
 }
@@ -122,13 +128,17 @@ error:
     return -1;
 }
 
-inline byte hexToNibbler(char hex) {
+//inline 
+inline byte hexToNibbler() __attribute__((always_inline));
+byte hexToNibbler(char hex) {
     if (hex > '9'){
         hex -= (('A'-'0')-0xA); //even if hex is lower case (e.g. 'a'), the lower nibble will have the correct value as (('a'-'A')&0x0F) = 0.
     }
     return (hex - '0'); //as we are keeping the lower nibble, the -'0' gets optimised away.
 }
-inline byte hexToByte(char* hex){
+//inline 
+inline byte hexToByte() __attribute__((always_inline));
+byte hexToByte(char* hex){
     //nibble.low = hexToNibbler(hex[1]);
     //nibble.high = hexToNibbler(hex[0]);
     Nibbler low = {hexToNibbler(hex[1])};
